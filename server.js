@@ -34,12 +34,25 @@ router = express.Router();
 //define route for blank entry's (welcome page)
 app.use('/', router);
 
+
+//try out save and retrieve from database. Use postman to send .post
 router.route('/input')
-.post(function(res,req){
+.post(function(req,res){
     var todo = new Todo();
     todo.user_id = req.body.who;
     todo.content = req.body.what;
     todo.updated_at = Date.now();
+    console.log("Who: " + req.body.who + "What: " + req.body.what);
+    todo.save(function(err){
+	if (err) console.log("Couldn't save!");
+    });
+})
+
+.get(function(req, res){
+    Todo.find(function (err, todos){
+	if (err) console.log("Couldn't find anything");
+	console.log(todos);
+    });
 });
 
 router.get('/todo', function(req, res, next){
