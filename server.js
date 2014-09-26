@@ -51,13 +51,16 @@ router.route('/input')
 .get(function(req, res){
     Todo.find(function (err, todos){
 	if (err) console.log("Couldn't find anything");
-	console.log(todos);
+//	console.log(json(todos));
+//	var count = bodyParser.json(todos).length;
+	var count = todos.length;
+	res.render('index.ejs', {title: "This is the list", intro: "These are new instructions", todos: todos, count: count});
+//	res.json({title: "This is the list", intro: "These are new instructions", todos: todos, count: count});
     });
 });
 
 router.get('/todo', function(req, res, next){
     console.log("Todo route started");
-//    res.json({message: "Horray, we are communicating"});
     next();
 });
 
