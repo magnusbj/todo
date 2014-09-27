@@ -51,11 +51,8 @@ router.route('/input')
 .get(function(req, res){
     Todo.find(function (err, todos){
 	if (err) console.log("Couldn't find anything");
-//	console.log(json(todos));
-//	var count = bodyParser.json(todos).length;
 	var count = todos.length;
-	res.render('index.ejs', {title: "This is the list", intro: "These are new instructions", todos: todos, count: count});
-//	res.json({title: "This is the list", intro: "These are new instructions", todos: todos, count: count});
+	res.render('index.ejs', {title: "There is more work to do!", intro: app.locals.intro, todos: todos});
     });
 });
 
